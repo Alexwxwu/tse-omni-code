@@ -1,0 +1,200 @@
+config: conf/encodec_lstm_16k_n32_600k_step_rmseg_use_power_ds640.yaml
+print_config: True
+log_level: INFO
+dry_run: false
+iterator_type: sequence
+output_dir: exp/encodec_lstm_16k_n32_600k_step_rmseg_use_power_ds640_raw_en_inhouse_open
+ngpu: 4
+seed: 0
+num_workers: 8
+num_att_plot: 0
+dist_backend: nccl
+dist_init_method: env://
+dist_world_size: null
+dist_rank: null
+local_rank: 0
+dist_master_addr: null
+dist_master_port: null
+dist_launcher: null
+multiprocessing_distributed: true
+unused_parameters: true
+sharded_ddp: false
+cudnn_enabled: true
+cudnn_benchmark: false
+cudnn_deterministic: false
+collect_stats: false
+write_collected_feats: false
+max_epoch: 60
+max_update: 9223372036854775807
+patience: null
+val_scheduler_criterion:
+- valid
+- loss
+early_stopping_criterion:
+- valid
+- loss
+- min
+best_model_criterion:
+-   - valid
+    - generator_multi_spectral_recon_loss
+    - min
+keep_nbest_models: 60
+nbest_averaging_interval: 0
+grad_clip: -1
+grad_clip_type: 2.0
+grad_noise: false
+accum_grad: 1
+no_forward_run: false
+resume: true
+train_dtype: float32
+use_amp: false
+log_interval: 50
+use_tensorboard: true
+use_wandb: false
+wandb_project: null
+wandb_id: null
+wandb_entity: null
+wandb_name: null
+wandb_model_log_interval: -1
+detect_anomaly: false
+pretrain_path: null
+init_param: []
+ignore_init_mismatch: true
+freeze_param: []
+num_iters_per_epoch: 10000
+batch_size: 256
+valid_batch_size: null
+batch_bins: 8000000
+valid_batch_bins: null
+drop_last: true
+train_shape_file:
+- exp/inhouse_open/train/speech_shape
+valid_shape_file:
+- exp/inhouse_open/dev/speech_shape
+batch_type: unsorted
+valid_batch_type: null
+speech_length_min: -1
+speech_length_max: -1
+fold_length:
+- 512
+- 150
+sort_in_batch: descending
+sort_batch: descending
+multiple_iterator: false
+chunk_length: 500
+chunk_shift_ratio: 0.5
+num_cache_chunks: 1024
+dataset_type: small
+dataset_conf: {}
+train_data_file: null
+valid_data_file: null
+train_data_path_and_name_and_type:
+-   - dump/inhouse_open/train/wav.scp.pai
+    - speech
+    - kaldi_ark
+valid_data_path_and_name_and_type:
+-   - dump/inhouse_open/dev/wav.scp.pai
+    - speech
+    - kaldi_ark
+allow_variable_data_keys: false
+max_cache_size: 0.0
+max_cache_fd: 32
+valid_max_cache_size: null
+optim: adam
+optim_conf:
+    lr: 0.0003
+    betas:
+    - 0.5
+    - 0.9
+scheduler: null
+scheduler_conf:
+    step_size: 8
+    gamma: 0.1
+optim2: adam
+optim2_conf:
+    lr: 0.0003
+    betas:
+    - 0.5
+    - 0.9
+scheduler2: null
+scheduler2_conf:
+    step_size: 8
+    gamma: 0.1
+simple_ddp: false
+num_worker_count: 2
+generator_first: false
+input_size: 1
+cmvn_file: null
+disc_grad_clip: -1
+disc_grad_clip_type: 2.0
+gen_train_interval: 1
+disc_train_interval: 1
+stat_flops: false
+use_preprocessor: true
+speech_volume_normalize: null
+speech_rms_normalize: false
+speech_max_length: 51200
+sampling_rate: 16000
+valid_max_length: 51200
+frontend: null
+frontend_conf: {}
+normalize: null
+normalize_conf: {}
+encoder: encodec_seanet_encoder
+encoder_conf:
+    ratios:
+    - 8
+    - 5
+    - 4
+    - 2
+    - 2
+    norm: time_group_norm
+    causal: false
+quantizer: costume_quantizer
+quantizer_conf:
+    codebook_size: 1024
+    num_quantizers: 32
+    ema_decay: 0.99
+    kmeans_init: true
+    sampling_rate: 16000
+    quantize_dropout: true
+    rand_num_quant:
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    use_ddp: true
+    encoder_hop_length: 640
+decoder: encodec_seanet_decoder
+decoder_conf:
+    ratios:
+    - 8
+    - 5
+    - 4
+    - 2
+    - 2
+    norm: time_group_norm
+    causal: false
+model: encodec
+model_conf:
+    odim: 128
+    multi_spectral_window_powers_of_two:
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    target_sample_hz: 16000
+    audio_normalize: true
+    segment_dur: null
+    overlap_ratio: null
+    use_power_spec_loss: true
+discriminator: multiple_disc
+discriminator_conf:
+    disc_conf_list:
+    -   filters: 32
+        name: encodec_multi_scale_stft_discriminator
+distributed: true
+version: 0.2.0

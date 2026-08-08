@@ -1,0 +1,36 @@
+*.out
+*.txt
+*.err
+__pycache__/
+test*
+*.pt
+ckpt/*
+*.pt
+*.log
+output/*
+!ckpt/.gitkeep
+*.pkl
+*.flac
+*.scp
+*.pth
+*.wav
+*.csv
+ac_output/
+sv_output/
+!evaluation/libri2mix_whisper_base.txt
+data/*.scp
+!ckpt/README.md
+data/LibriMix/
+*.npy
+!data/libri2mix_100_360_aux_s1.txt
+
+
+## pyrightconfig.json
+pyrightconfig.json
+
+## third-party dependencies (not part of this repo)
+FunCodec/
+apex/
+checkpoints/
+data/dump/
+data/funcodec/

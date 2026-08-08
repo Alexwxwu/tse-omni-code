@@ -94,4 +94,4 @@ This project is built upon and thanks the following open-source projects:
   data scp format are mainly based on this repository.
 - [ClearerVoice-Studio](https://github.com/modelscope/ClearerVoice-Studio): the
   dataloader and training optimization are based on a simplified version of
-  this repository, which also provides the segmentation (seg) model checkpoint.
+  this repository, which also provides the  Gesture-cue (SEG) model checkpoint.
